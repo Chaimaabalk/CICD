@@ -20,7 +20,6 @@ test('renders the Form component and checks for the Save button', () => {
     const postalCodeInput = getByLabelText('Postal Code:');
     const saveButton = getByText('Save');
   
-    // Fill the form with valid data
     fireEvent.change(firstNameInput, { target: { value: 'John' } });
     fireEvent.change(lastNameInput, { target: { value: 'Doe' } });
     fireEvent.change(emailInput, { target: { value: 'john.doe@example.com' } });
@@ -28,8 +27,7 @@ test('renders the Form component and checks for the Save button', () => {
     fireEvent.change(postalCodeInput, { target: { value: '12345' } });
   
     fireEvent.click(saveButton);
-  
-    // Wait for toast messages
+
     await waitFor(() => {
       expect(localStorage.getItem('formData')).toBeTruthy();
       const formData = JSON.parse(localStorage.getItem('formData'));

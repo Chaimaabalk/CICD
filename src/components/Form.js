@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../style/Form.css";
 const Form = () => {
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -25,7 +26,13 @@ const Form = () => {
       [name]: value,
     }));
   };
-
+  const isFormValid = () => {
+    return (!formData.firstName ||
+    !formData.lastName ||
+    !formData.email ||
+    !formData.dateOfBirth ||
+    !formData.postalCode)
+};
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -81,13 +88,16 @@ const Form = () => {
     theme="light"
     >
     </ToastContainer>
-        <form onSubmit={handleSubmit} className="form-container">
+    <form onSubmit={handleSubmit} className="form-container">
+        <h3>User Registration</h3>
+        <div className="Name">
       <div className="label-input">
         <label>
           First Name:
           <input
             type="text"
             name="firstName"
+            placeholder="First Name"
             value={formData.firstName}
             onChange={handleChange}
           />
@@ -97,10 +107,12 @@ const Form = () => {
           <input
             type="text"
             name="lastName"
+            placeholder="Last Name"
             value={formData.lastName}
             onChange={handleChange}
           />
         </label>
+        </div>
       </div>
       <div className="label-input">
         <label>
@@ -108,6 +120,7 @@ const Form = () => {
           <input
             type="email"
             name="email"
+            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
           />
@@ -128,6 +141,7 @@ const Form = () => {
           <input
             type="text"
             name="city"
+            placeholder="City"
             value={formData.city}
             onChange={handleChange}
           />
@@ -137,6 +151,7 @@ const Form = () => {
           <input
             type="text"
             name="postalCode"
+            placeholder="Postal Code"
             value={formData.postalCode}
             onChange={handleChange}
           />
@@ -144,13 +159,8 @@ const Form = () => {
       </div>
       <button
         type="submit"
-        disabled={
-          !formData.firstName ||
-          !formData.lastName ||
-          !formData.email ||
-          !formData.dateOfBirth ||
-          !formData.postalCode
-        }
+        style={ isFormValid () ? {backgroundColor: "grey"} : {backgroundColor: "#ae3c33"}}
+        disabled={isFormValid()}
         className="submit-btn"
       >
         Save
