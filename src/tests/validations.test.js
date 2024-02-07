@@ -1,0 +1,56 @@
+import {
+    isValidName,
+    isValidEmail,
+    isValidPostalCode,
+    isOver18,
+  } from "../utils/validations";
+/**
+ * @functions isValidName, isValidEmail, isValidPostalCode, isOver18 
+ */
+
+  describe("isValidName", () => {
+    it("should return true for valid names", () => {
+      expect(isValidName("John")).toBe(true);
+      expect(isValidName("D'Angelo")).toBe(true);
+      expect(isValidName("Jean-Luc")).toBe(true);
+      expect(isValidName("Marie-Laure")).toBe(true);
+    });
+  
+    it("should return false for invalid names", () => {
+      expect(isValidName("123")).toBe(false);
+      expect(isValidName("John@Doe")).toBe(false);
+      expect(isValidName("Jean!")).toBe(false);
+    });
+  });
+  
+  describe("isValidEmail", () => {
+    it("should return true for valid emails", () => {
+      expect(isValidEmail("john@example.com")).toBe(true);
+      expect(isValidEmail("john.doe@example.co.uk")).toBe(true);
+    });
+  
+    it("should return false for invalid emails", () => {
+      expect(isValidEmail("john@example")).toBe(false);
+      expect(isValidEmail("john@example@com")).toBe(false);
+    });
+  });
+  
+  describe("isValidPostalCode", () => {
+    it("should return true for valid French postal codes", () => {
+      expect(isValidPostalCode("75001")).toBe(true);
+      expect(isValidPostalCode("13008")).toBe(true);
+    });
+  
+    it("should return false for invalid postal codes", () => {
+      expect(isValidPostalCode("123456")).toBe(false);
+      expect(isValidPostalCode("ABC12")).toBe(false);
+    });
+  });
+  
+  describe("isOver18", () => {
+    it("should return correct age for given date of birth", () => {
+      expect(isOver18("2000-01-01")).toBeGreaterThanOrEqual(18);
+      expect(isOver18("2010-01-01")).toBeLessThan(18);
+    });
+  });
+  

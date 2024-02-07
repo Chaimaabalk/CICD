@@ -1,0 +1,57 @@
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .label-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .label-input label {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .label-input input[type="text"],
+  .label-input input[type="email"],
+  .label-input input[type="date"],
+  .label-input button[type="submit"] {
+    padding: 10px;
+    border: none;
+    border-radius: 10px; 
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .form-container button {
+    align-self: center;
+  }
+
+  .submit-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+.submit-btn:hover {
+    background-color: #0056b3;
+  }
+
+
+  
+
+  
+ 
+ 
+  
+  
+ 
