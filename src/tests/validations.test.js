@@ -4,8 +4,34 @@ import {
     isValidPostalCode,
     isOver18,
   } from "../utils/validations";
+
 /**
  * @functions isValidName, isValidEmail, isValidPostalCode, isOver18 
+ * @param {string} name
+ * @param {string} email
+ * @param {string} postalCode
+ * @param {string} dateOfBirth
+ * @returns {boolean}
+ */
+  
+  describe("isValidName", () => {
+    it("should return true for valid names", () => {
+      expect(isValidName("John")).toBe(true);
+      expect(isValidName("D'Angelo")).toBe(true);
+      expect(isValidName("Jean-Luc")).toBe(true);
+      expect(isValidName("Marie-Laure")).toBe(true);
+    });
+  
+    it("should return false for invalid names", () => {
+      expect(isValidName("123")).toBe(false);
+      expect(isValidName("xxxx@xxx")).toBe(false);
+      expect(isValidName("Jean!")).toBe(false);
+    });
+  });
+  
+  describe("isValidEmail", () => {
+    it("should return true for valid emails", () => {
+      expect(isValidEmail("
  */
 
   describe("isValidName", () => {

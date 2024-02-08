@@ -1,3 +1,19 @@
+// jsdoc
+/**
+ * @function isValidName
+ * @param {string} name
+ * @returns {boolean}
+ * @function isValidEmail
+ * @param {string} email
+ * @returns {boolean}
+ * @function isValidPostalCode
+ * @param {string} postalCode
+ * @returns {boolean}
+ * @function isOver18
+ * @param {string} dateOfBirth
+ * @returns {boolean}
+ */
+
 
 export const isValidName = (name) => {
     const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
