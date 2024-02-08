@@ -11,6 +11,7 @@ import "../style/Form.css";
 
 // jsdoc 
 /**
+ * Form component
  * @typedef {Object} FormData
  * @property {string} firstName
  * @property {string} lastName
