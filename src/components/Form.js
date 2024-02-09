@@ -85,7 +85,6 @@ const Form = () => {
     } else {
       localStorage.setItem("formData", JSON.stringify(formData));
       toast.success("Form saved successfully!");
-      // setSuccess(true);
       setFormData({
         firstName: "",
         lastName: "",
@@ -123,7 +122,6 @@ const Form = () => {
             type="text"
             name="firstName"
             placeholder="First Name"
-            required = {true}
             value={formData.firstName}
             onChange={handleChange}
           />
