@@ -4,6 +4,7 @@ import {
     isValidPostalCode,
     isOver18,
     isValidCity,
+    isNotEmpty,
   } from "../utils/validations";
 
 /**
@@ -77,7 +78,20 @@ import {
   describe("isOver18", () => {
     it("should return correct age for given date of birth", () => {
       expect(isOver18("2000-01-01")).toBeGreaterThanOrEqual(18);
-      expect(isOver18("2010-01-01")).toBeLessThan(18);
+      expect(isOver18("2012-01-01")).toBeLessThan(18);
+    });
+    it("should return age minus 1 if the birthday hasn't happened yet", () => {
+      expect(isOver18("2006-07-02")).toBe(17);
+    });
+  });
+
+  describe("isNotEmpty", () => {
+    it("should return true for valid inputs", () => {
+      expect(isNotEmpty("John")).toBe(true);
+      expect(isNotEmpty("Doe")).toBe(true);
+    });
+    it("should return false for invalid inputs", () => {
+      expect(isNotEmpty("")).toBe(false);
     });
   });
   

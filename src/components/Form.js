@@ -5,6 +5,7 @@ import {
   isValidPostalCode,
   isOver18,
   isValidCity,
+  isNotEmpty,
 } from "../utils/validations";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,7 +25,7 @@ import "../style/Form.css";
 const Form = () => {
 
   const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -55,13 +56,13 @@ const Form = () => {
     const newErrors = {};
 
     // Validation
-    if (!isValidName(formData.firstName)) {
+    if (!isValidName(formData.firstName)|| !isNotEmpty(formData.firstName)) {
       newErrors.firstName = "First name is invalid";
     }
-    if (!isValidName(formData.lastName)) {
+    if (!isValidName(formData.lastName) || !isNotEmpty(formData.lastName)){
       newErrors.lastName = "Last name is invalid";
     }
-    if(!isValidCity(formData.city)){
+    if(!isValidCity(formData.city) || !isNotEmpty(formData.city)){
       newErrors.city = "City is invalid";
     }
 
@@ -74,6 +75,7 @@ const Form = () => {
     if (isOver18(formData.dateOfBirth) < 18) {
       newErrors.dateOfBirth = "You must be over 18 years old";
     }
+  
 
     if (Object.keys(newErrors).length > 0) {
       Object.keys(newErrors).forEach((key) => {
@@ -83,7 +85,7 @@ const Form = () => {
     } else {
       localStorage.setItem("formData", JSON.stringify(formData));
       toast.success("Form saved successfully!");
-      setSuccess(true);
+      // setSuccess(true);
       setFormData({
         firstName: "",
         lastName: "",

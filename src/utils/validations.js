@@ -3,12 +3,23 @@
  * @function isValidName
  * @param {string} name
  * @returns {boolean}
+ */
+/**
+ * @function isValidCity
+ * @param {string} city
+ * @returns {boolean}
+ */
+/**
  * @function isValidEmail
  * @param {string} email
  * @returns {boolean}
+ */
+/**
  * @function isValidPostalCode
  * @param {string} postalCode
  * @returns {boolean}
+ */
+/**
  * @function isOver18
  * @param {string} dateOfBirth
  * @returns {boolean}
@@ -16,7 +27,7 @@
 
 
 export const isValidName = (name) => {
-    const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
+    const nameRegex = /^[a-zA-ZÀ-ÿ\-'|\s]+$/;
     return nameRegex.test(name);
   };
   export const isValidCity = (city) => {
@@ -43,5 +54,9 @@ export const isValidName = (name) => {
       return age - 1;
     }
     return age;
+  };
+
+  export const isNotEmpty = (value) => {
+    return value.trim() !== "";
   };
   
