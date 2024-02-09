@@ -3,6 +3,7 @@ import {
     isValidEmail,
     isValidPostalCode,
     isOver18,
+    isValidCity,
   } from "../utils/validations";
 
 /**
@@ -32,6 +33,20 @@ import {
       expect(isValidName("123")).toBe(false);
       expect(isValidName("John@Doe")).toBe(false);
       expect(isValidName("Jean!")).toBe(false);
+    });
+  });
+  describe("isValidCity", () => {
+    it("should return true for valid cities", () => {
+      expect(isValidCity("Paris")).toBe(true);
+      expect(isValidCity("New York")).toBe(true);
+      expect(isValidCity("Los Angeles")).toBe(true);
+      expect(isValidCity("San Francisco")).toBe(true);
+    });
+  
+    it("should return false for invalid cities", () => {
+      expect(isValidCity("123")).toBe(false);
+      expect(isValidCity("Paris@")).toBe(false);
+      expect(isValidCity("Los Angeles!")).toBe(false);
     });
   });
   

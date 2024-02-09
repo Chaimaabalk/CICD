@@ -19,6 +19,10 @@ export const isValidName = (name) => {
     const nameRegex = /^[a-zA-ZÀ-ÿ\-']+$/;
     return nameRegex.test(name);
   };
+  export const isValidCity = (city) => {
+    const nameRegex = /^[a-zA-ZÀ-ÿ\-'|\s]+$/;
+    return nameRegex.test(city);
+  };
   
   export const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

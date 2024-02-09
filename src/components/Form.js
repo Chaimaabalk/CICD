@@ -4,12 +4,12 @@ import {
   isValidEmail,
   isValidPostalCode,
   isOver18,
+  isValidCity,
 } from "../utils/validations";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../style/Form.css";
 
-// jsdoc 
 /**
  * Form component
  * @typedef {Object} FormData
@@ -22,6 +22,9 @@ import "../style/Form.css";
  */
 
 const Form = () => {
+
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -58,6 +61,10 @@ const Form = () => {
     if (!isValidName(formData.lastName)) {
       newErrors.lastName = "Last name is invalid";
     }
+    if(!isValidCity(formData.city)){
+      newErrors.city = "City is invalid";
+    }
+
     if (!isValidEmail(formData.email)) {
       newErrors.email = "Email is invalid";
     }
@@ -70,11 +77,13 @@ const Form = () => {
 
     if (Object.keys(newErrors).length > 0) {
       Object.keys(newErrors).forEach((key) => {
-        toast.error(newErrors[key]);
+        toast.error(newErrors[key]+" !");
+        setErrors(newErrors);
       });
     } else {
       localStorage.setItem("formData", JSON.stringify(formData));
       toast.success("Form saved successfully!");
+      setSuccess(true);
       setFormData({
         firstName: "",
         lastName: "",
@@ -83,6 +92,7 @@ const Form = () => {
         city: "",
         postalCode: "",
       });
+      setErrors({});
     }
   };
 
@@ -111,9 +121,11 @@ const Form = () => {
             type="text"
             name="firstName"
             placeholder="First Name"
+            required = {true}
             value={formData.firstName}
             onChange={handleChange}
           />
+          {errors.firstName && <span style={{ color: "red" }}>{errors.firstName}</span>}
         </label>
         <label >
           Last Name:
@@ -124,6 +136,7 @@ const Form = () => {
             value={formData.lastName}
             onChange={handleChange}
           />
+          {errors.lastName && <span style={{ color: "red" }}>{errors.lastName}</span>}
         </label>
         </div>
       </div>
@@ -137,6 +150,7 @@ const Form = () => {
             value={formData.email}
             onChange={handleChange}
           />
+          {errors.email && <span style={{ color: "red" }}>{errors.email}</span>}
         </label>
         <label>
           Date of Birth:
@@ -146,6 +160,7 @@ const Form = () => {
             value={formData.dateOfBirth}
             onChange={handleChange}
           />
+          {errors.dateOfBirth && <span style={{ color: "red" }}>{errors.dateOfBirth}</span>}
         </label>
       </div>
       <div className="label-input">
@@ -158,6 +173,7 @@ const Form = () => {
             value={formData.city}
             onChange={handleChange}
           />
+          {errors.city && <span style={{ color: "red" }}>{errors.city}</span>}
         </label>
         <label>
           Postal Code:
@@ -168,6 +184,7 @@ const Form = () => {
             value={formData.postalCode}
             onChange={handleChange}
           />
+          {errors.postalCode && <span style={{ color: "red" }} >{errors.postalCode}</span>}
         </label>
       </div>
       <button
