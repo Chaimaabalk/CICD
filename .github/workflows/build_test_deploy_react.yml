@@ -23,13 +23,12 @@ jobs:
           npm run jsdoc
           npm run build --if-present
           npm test
-      - name: Update Build Version
+      - name: Update build version
         id: update_version
-        run: echo "BUILD_VERSION=$(date +%Y%m%d)-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}" >> $GITHUB_ENV
-      - name: Update README with Build Version
+        run: echo "::set-output name=version::v${GITHUB_RUN_ID}.${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
+      - name: Update README with new version
         run: |
-          sed -i "s/\(Version actuelle : V\)[0-9]*\.[0-9]*\.[0-9]*/\1${BUILD_VERSION}/" README.md
-          sed -i "s/\(version précédente : V\)[0-9]*\.[0-9]*\.[0-9]* → lien/\1${PREVIOUS_VERSION} → [artifact](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${PREVIOUS_RUN_ID})/" README.md
+          sed -i "s/\(Version actuelle : \)\(.*\)/\1${{ steps.update_version.outputs.version }}, version précédente : \2 → [artifact](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/)" README.md
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
