@@ -25,19 +25,18 @@ jobs:
           npm test
       - name: Update build version
         id: update_version
-        run: echo "::set-output name=version::v${GITHUB_RUN_ID}.${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
+        run: |
+            version="v${GITHUB_RUN_ID}.${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
+            echo "::set-output name=version::$version"
+            echo "Build version updated to $version"
       - name: Update README with new version
         run: |
-          sed -i "s/\(Version actuelle : \)\(.*\)/\1${{ steps.update_version.outputs.version }}, version précédente : \2 → [artifact](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/)" README.md
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
+            sed -i "s/\(Version actuelle : \)\(.*\)/\1${{ steps.update_version.outputs.version }}, version précédente : \2 → [artifact](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/)" README.md
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
-        # Upload entire repository
-          path: build
-          if-no-files-found: error
+            name: build
+            path: build
           
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
