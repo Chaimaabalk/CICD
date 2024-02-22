@@ -23,25 +23,31 @@ jobs:
           npm run jsdoc
           npm run build --if-present
           npm test
-      - name: Update build version
-        id: update_version
+      - name : update versionning
         run: |
-              version="v${GITHUB_RUN_ID}.${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
-              echo "::set-output name=version::$version"
-              echo "Build version updated to $version"
-      - name: Update README with new version
-        run: |
-              sed -i "s/\(Version actuelle : \)\(.*\)/\1${{ steps.update_version.outputs.version }}, version précédente : \2 → [artifact](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/)" README.md
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
+          git config --global user.email "balkassechaimaa8@gmail.com"
+          git config --global user.name "Chaimaabalk"
+          npm -i -g semver
+          npm version $(semver 0.1.1 -i prerelease --preid ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}})
+          echo $(semver 0.1.1 -i prerelease --preid ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}) >> README.md
+          git commit -am "new version ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}} "
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@main
         with:
-              name: build
-              path: build
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
           
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+                path: build
+                if-no-files-found: error
     
   #Deploy job
   deploy:
@@ -60,8 +66,5 @@ jobs:
          id: deployment
          uses: actions/deploy-pages@v2
       
-       - name: Update README with previous artifact link
-         run: |
-           sed -i "s/\(Version actuelle : \)\(.*\)/\1v8005092996.10.1, version précédente : \2 → [artifact](https:\/\/github.com\/Chaimaabalk\/CICD\/actions\/runs\/8005092996\/)/" README.md
-         
+      
       
