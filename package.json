@@ -1,6 +1,6 @@
 {
   "name": "cicd",
-  "version": "0.1.0",
+  "version": "0.1.2-8019692072-16-1.0",
   "private": true,
   "homepage": "https://chaimaabalk.github.io/CICD/",
   "dependencies": {
@@ -19,8 +19,8 @@
     "test": "react-scripts test --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/reportWebVitals.js --collectCoverageFrom=!src/index.js  --collectCoverageFrom=!src/App.js --watchAll=false",
     "eject": "react-scripts eject",
     "jsdoc": "jsdoc -R ./README.md -c ./jsdoc.config.json -r -d ./public/docs",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
