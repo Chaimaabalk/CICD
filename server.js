@@ -2,7 +2,8 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     user: 'root',
     password: 'Testpwd',
-    database: 'ynov_ci'
+    database: 'ynov_ci',
+    // host: 'MYSQL_HOST'
 });
 connection.connect(function(err) {
     if (err) throw err;
