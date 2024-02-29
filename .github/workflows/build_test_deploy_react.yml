@@ -67,14 +67,16 @@ jobs:
          id-token: write
        needs: build_test
        steps:
-        - name: Download artifact
-          uses: actions/download-artifact@v2
-          with:
-            name: build-artifact
-            path: build
+        # - name: Download artifact
+        #   uses: actions/download-artifact@v2
+        #   with:
+        #     name: build-artifact
+        #     path: build
         - name: Deploy to GitHub Pages
           id: deployment
           uses: actions/deploy-pages@v2
+
+
       
       
       
